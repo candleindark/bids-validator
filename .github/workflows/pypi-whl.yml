@@ -69,8 +69,10 @@ jobs:
         working-directory: .
         run: |
           # Check if the tag is a release version tag
+          set +e
           jq -e ".version[:1] != \"v\" and .version==\"$TAG\"" deno.json
           ret=$?
+          set -e
           if [ $ret -eq 0 ]; then
               # Tag is a release version tag
               twine upload --verbose --repository testpypi dist/*.whl
