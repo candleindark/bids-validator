@@ -2,7 +2,7 @@ name: PyPI Whl Publish
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, publishing-test]
     tags: ['*']
   pull_request:
     branches: [main, dev]
@@ -70,7 +70,7 @@ jobs:
         run: |
           # Check if the tag is a version tag
           if jq -e ".version[:1] != \"v\" and .version==\"$TAG\"" deno.json; then 
-              twine upload --verbose dist/*.whl
+              twine upload --verbose --repository testpypi dist/*.whl
           else
               echo not releasing ($TAG is not a version tag); 
           fi
