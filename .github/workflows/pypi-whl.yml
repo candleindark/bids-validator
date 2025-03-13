@@ -68,6 +68,7 @@ jobs:
         if: github.ref_type == 'tag'
         working-directory: .
         run: |
+          rm deno.json # testing purposes only
           # Check if the tag is a release version tag
           set +e
           jq -e ".version[:1] != \"v\" and .version==\"$TAG\"" deno.json
