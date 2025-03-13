@@ -68,8 +68,6 @@ jobs:
         if: github.ref_type == 'tag'
         working-directory: .
         run: |
-          pwd
-          ls -lh
           # Check if the tag is a release version tag
           if jq -e ".version[:1] != \"v\" and .version==\"$TAG\"" deno.json; then 
               twine upload --verbose --repository testpypi dist/*.whl
