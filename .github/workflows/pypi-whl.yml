@@ -72,7 +72,7 @@ jobs:
           if jq -e ".version[:1] != \"v\" and .version==\"$TAG\"" deno.json; then 
               twine upload --verbose --repository testpypi dist/*.whl
           else
-              echo not releasing ($TAG is not a version tag); 
+              echo "Not releasing ($TAG is not a version tag)"
           fi
         env:
           TWINE_USERNAME: __token__
